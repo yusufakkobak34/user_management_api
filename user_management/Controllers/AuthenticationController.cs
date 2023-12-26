@@ -22,6 +22,22 @@ namespace user_management.Controllers
             _userManager = userManager;
         }
 
+
+        [HttpPost]
+        [Route("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
+        {
+            var result = await RegisterAsync(request);
+            return result.Success ? Ok(result) : BadRequest(result.Message);
+        }
+
+        private async Task<RegisterResponse> RegisterAsync(RegisterRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
         [HttpPost]
         [Route("login")]
         [ProducesResponseType((int) HttpStatusCode.OK, Type =typeof(LoginResponse))]
