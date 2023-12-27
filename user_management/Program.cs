@@ -20,7 +20,7 @@ var mongoDbIdentityConfig = new MongoDbIdentityConfiguration
 {
     MongoDbSettings = new MongoDbSettings
     {
-        ConnectionString = "",
+        ConnectionString = "mongodb://localhost:27017",
         DatabaseName = "UserManagement"
     },
     IdentityOptionsAction = options =>
