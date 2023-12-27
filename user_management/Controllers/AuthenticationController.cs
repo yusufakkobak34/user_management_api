@@ -48,7 +48,15 @@ namespace user_management.Controllers
                     UserName = request.Email,
                 };
 
-                // <<<----- Breakpoint commit ------>>>>
+                var createUserResult = await _userManager.CreateAsync(userExists, request.Password);
+                if (!createUserResult.Succeeded) return new RegisterResponse { Message = $"Create user failed {createUserResult?.Errors?.First()?.Description}", Success = false }; 
+                var addUserToRoleResult = await _userManager.AddToRoleAsync(userExists, "USER");
+                if (!addUserToRoleResult.Succeeded) return new RegisterResponse { Message = $"Create user succeeded but could not add user to role {addUserToRoleResult?.Errors?.First()?.Description}", Success = false };
+                return new RegisterResponse
+                {
+                    Success = true,
+                    Message = "User registered successfully"
+                };
 
             }
             catch (Exception ex)
