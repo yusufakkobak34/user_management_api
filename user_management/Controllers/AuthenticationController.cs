@@ -108,7 +108,7 @@ namespace user_management.Controllers
                 var roleClaims = roles.Select(x => new Claim(ClaimTypes.Role, x));
                 claims.AddRange(roleClaims);
 
-                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("1swek3u4uo2u4a6e"));
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("your_key_with_at_least_256_bits_or_difference"));
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
                 var expires = DateTime.Now.AddMinutes(30);
 
