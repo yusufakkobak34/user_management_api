@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using MongoAuthenticatorAPI.Dtos;
 using user_management.Dtos.Responses;
+using user_management.Dtos.Role;
 using user_management.Models;
 using RegisterRequest = MongoAuthenticatorAPI.Dtos.RegisterRequest;
 
@@ -18,12 +18,22 @@ namespace user_management.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
 
-        public AuthenticationController(UserManager<ApplicationUser> userManager)
+        public AuthenticationController(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
+        [HttpPost]
+        [Route("roles/add")]
+        public async Task<IActionResult> CreateRole([FromBody] CreateRoleRequest request)
+        {
+            var appRole = new ApplicationRole { Name = request.Role };
+            var createRole = await _roleManager.CreateAsync(appRole);
+            return Ok(new { message = "Role created successfully" });
+        }
 
         [HttpPost]
         [Route("register")]

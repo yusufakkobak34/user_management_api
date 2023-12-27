@@ -24,6 +24,7 @@
     <None Remove="Dtos\" />
     <None Remove="Dtos\Requests\" />
     <None Remove="Dtos\Responses\" />
+    <None Remove="Dtos\Role\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\" />
@@ -31,5 +32,6 @@
     <Folder Include="Dtos\" />
     <Folder Include="Dtos\Requests\" />
     <Folder Include="Dtos\Responses\" />
+    <Folder Include="Dtos\Role\" />
   </ItemGroup>
 </Project>
